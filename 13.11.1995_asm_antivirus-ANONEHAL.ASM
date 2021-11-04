@@ -1,12 +1,10 @@
-; 		Бердник В.Л.   
-
 ;------------------------------------------------------------------------------
 
 	 .model tiny
 	 .code
 	 org 100h
 start:	jmp	begin
-coob	db 'В памяти возможен OneHalf' 
+coob	db 'тАЪ OneHalf presents in memory' 
 old	dd	?
 	
 vect 	PROC	far
@@ -26,18 +24,18 @@ poo3:	push	ax
 	push	ds
 	push	cs
 	pop	ds
-	lea	si,coob		; установка указателя на строку
-	mov	ax,0b800h	; установка указателя на видеобуфер
+	lea	si,coob		
+	mov	ax,0b800h	; video
 	mov	es,ax
 	mov	di,60d		;; 30stolb+0ctr*80stolb    * 2
-	mov	ah,1ah		;; (фон*16)+text 1 - синий  6-коричневый
-	mov	cx,18d		; длина первого слова
-poo1:	lodsb			; печать слова
+	mov	ah,1ah		;; (├д┬о┬н*16)+text
+	mov	cx,18d		┬а
+poo1:	lodsb			┬а
 	stosw
 	loop	poo1
-	mov	ah,0ch		;; (фон*16)+text 1 - синий  6-коричневый
-	mov	cx,7		; длина первого слова
-poo2:	lodsb			; печать слова
+	mov	ah,0ch		
+	mov	cx,7		┬а
+poo2:	lodsb			
 	stosw
 	loop	poo2
 	
@@ -52,34 +50,30 @@ exit:	pop	di
 vect	ENDP	
 
 begin:
-	MOV  DX,OFFSET Report   ; Report на экран
+	MOV  DX,OFFSET Report   ; Report ┬н┬а ├н┬к├а┬а┬н
 	mov	ah,09h
 	int	21h
 ;-------------------------------------------------------------------------------
-        mov     ax,3509h       		 ; Взять вектор 09h
+        mov     ax,3509h       		 ; stay native
         int     21h 
-        mov     WORD PTR old,bx    ; Сохранить старый вектор
+        mov     WORD PTR old,bx    
         mov     WORD PTR old+2,es  
 
-        mov     ax,2509h        	; Установить
-        lea     dx,vect			; свой
-        int     21h            		; вектор
+        mov     ax,2509h        	
+        lea     dx,vect			
+        int     21h            		
 
-        lea     dx,begin       		; Смещение начала нерезидентной части
+        lea     dx,begin       		
         int	27h
         
 Report DB 10,13
- DB '                ╔═════════════════════════════════════════════╗ ',10,13
- DB '                ║          Г р у п п а   В Т - 4 6 2          ║ ',10,13
- DB '                ║         Бердник В.Л.                        ║ ',10,13
- DB '                ║        Проверка обьема свободной памяти     ║ ',10,13
- DB '                ║                                             ║ ',10,13
- DB '                ╚═════════════════════════════════════════════╝ $'
+ DB '                ├Й├Н├Н├Н├Н├Н├Н├Н├Н├Н├Н├Н├Н├Н├Н├Н├Н├Н├Н├Н├Н├Н├Н├Н├Н├Н├Н├Н├Н├Н├Н├Н├Н├Н├Н├Н├Н├Н├Н├Н├Н├Н├Н├Н├Н├Н┬╗ ',10,13
+ DB '                ┬║          VT - 4 6 2                         ┬║ ',10,13
+ DB '                ┬║          Antivirus                          ┬║ ',10,13
+ DB '                ┬║        Vladislav Berdnik                    ┬║ ',10,13
+ DB '                ┬║                                             ┬║ ',10,13
+ DB '                ├И├Н├Н├Н├Н├Н├Н├Н├Н├Н├Н├Н├Н├Н├Н├Н├Н├Н├Н├Н├Н├Н├Н├Н├Н├Н├Н├Н├Н├Н├Н├Н├Н├Н├Н├Н├Н├Н├Н├Н├Н├Н├Н├Н├Н├Н┬╝ $'
 ;===============================================================================
 ;-------------------------------------------------------------------------------
 
 	end     start
-
-	
-		
-	
